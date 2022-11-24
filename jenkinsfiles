@@ -2,7 +2,7 @@ pipeline {
     agent any
     tools
     { jdk 'java 11’}
-    environment { JAVA_HOME = 'C: Program Files Java jdk-11.0.17'}
+    environment { JAVA_HOME = 'C:\Program Files\Java\jdk-11.0.17'}
     stages {
         stage ('Compile Stage') {
             steps {
