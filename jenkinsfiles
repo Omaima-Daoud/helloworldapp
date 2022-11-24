@@ -1,12 +1,27 @@
 pipeline {
     agent any
+    tools
+    { jdk 'java 11’}
+    environment { JAVA_HOME = 'C: Program Files Java jdk-11.0.17'}
     stages {
-        stage('Hello') {
-            steps {echo 'Hello World' }
-                        }
-    stage('Java Version') {
-            steps
-            {bat 'java -version' }
-        }
+        stage ('Compile Stage') {
+            steps {
+                withMaven(maven : 'maven 3.8.6') {
+                                    bat 'mvn clean compile'}
+                }
             }
-}
+        stage ('Testing Stage') {
+            steps {
+                withMaven(maven : 'maven 3.8.6') {
+                           bat 'mvn test'
+                           } 
+            }
+        }
+        stage ('Install Stage') {
+            steps {
+                withMaven (maven : 'maven 3.8.6') {
+                bat 'mvn install' }
+            }
+       }
+      } 
+    }
